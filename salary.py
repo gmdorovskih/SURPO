@@ -15,14 +15,19 @@ def calculate_tax(salary):
     """Налог 13%"""
     return salary * 0.13
 
-def calculate_total(hours, rate, years):
-    """Итоговая зарплата с бонусом"""
+def calculate_premium(projects):
+    """Премия за проекты: 50000 за каждый проект"""
+    return projects * 50000
+
+def calculate_total(hours, rate, years, projects):
+    """Итоговая зарплата с бонусом и премией"""
     base = calculate_salary(hours, rate)
     bonus = calculate_bonus(years, base)
-    total = base + bonus
-    tax = calculate_tax(total)  # БАГ: налог считается от зарплаты с бонусом
-    return total - tax  # Дважды вычитаем? НЕТ, это правильно
+    premium = calculate_premium(projects)
+    total = base + bonus + premium
+    tax = calculate_tax(total)
+    return total - tax
 
 if __name__ == "__main__":
-    total = calculate_total(160, 1000, 3)
+    total = calculate_total(160, 1000, 3, 2)
     print(f"Итого: {total}")
