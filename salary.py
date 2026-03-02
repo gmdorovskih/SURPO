@@ -11,11 +11,17 @@ def calculate_bonus(years, salary):
     bonus_percent = min(years * 0.1, 0.5)
     return salary * bonus_percent
 
+def calculate_tax(salary):
+    """Налог 13%"""
+    return salary * 0.13
+
 def calculate_total(hours, rate, years):
     """Итоговая зарплата с бонусом"""
     base = calculate_salary(hours, rate)
     bonus = calculate_bonus(years, base)
-    return base + bonus
+    total = base + bonus
+    tax = calculate_tax(total)  # БАГ: налог считается от зарплаты с бонусом
+    return total - tax  # Дважды вычитаем? НЕТ, это правильно
 
 if __name__ == "__main__":
     total = calculate_total(160, 1000, 3)
